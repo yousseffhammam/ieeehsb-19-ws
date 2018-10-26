@@ -1,0 +1,24 @@
+{
+  "name": "ieee-hsb",
+  "version": "1.0.0",
+  "description": "IEEE Helwan Student Branch is the first student organization to be founded in helwan university",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhammedemad/ieee-19_website.git"
+  },
+  "keywords": [
+    "ieee",
+    "ieeehsb",
+    "hsb"
+  ],
+  "author": "Mohamed Emad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/muhammedemad/ieee-19_website/issues"
+  },
+  "homepage": "https://github.com/muhammedemad/ieee-19_website#readme"
+}
