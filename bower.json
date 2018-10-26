@@ -1,0 +1,24 @@
+{
+  "name": "ieee-HSB",
+  "description": "IEEE Helwan Student Branch is the first student organization to be founded in helwan university",
+  "main": "index.html",
+  "authors": [
+    "mohamed.emad <m.emad550@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://ieeehsb.org/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "susy": "^2.2.12",
+    "breakpoint-sass": "^2.7.1"
+  },
+  "dependencies": {
+    "breakpoint-sass": "^2.7.1"
+  }
+}

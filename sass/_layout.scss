@@ -1,0 +1,17 @@
+//susy configurations
+$susy: (
+  columns: 12,
+  gutters: 0.5,
+  //gutter-position: inside,
+  global-box-sizing: border-box,
+  //output: isolate
+);
+/*break points*/
+$bp-mobile: 320px; 
+$bp-tablet: 768px;
+$bp-desktop: 1200px;
+
+// $bp-mobile-to-tablet: $bp-mobile $bp-tablet;
+// $bp-tablet-to-desktop: $bp-tablet $bp-desktop;
+
+$main-width: 1170px;

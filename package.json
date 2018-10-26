@@ -20,5 +20,23 @@
   "bugs": {
     "url": "https://github.com/muhammedemad/ieee-19_website/issues"
   },
-  "homepage": "https://github.com/muhammedemad/ieee-19_website#readme"
+  "homepage": "https://github.com/muhammedemad/ieee-19_website#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8",
+    "gulp-wrapper": "^1.0.0",
+    "jshint": "^2.9.6"
+  }
 }
