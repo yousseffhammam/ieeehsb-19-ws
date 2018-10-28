@@ -1,9 +1,0 @@
-header{
-    @include breakpoint($bp-tablet){
-        @include span (6 of 12);
-        background-color: aqua;
-        padding: 10px;
-
-    }
-    
-}
