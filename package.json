@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/muhammedemad/ieee-19_website#readme",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-imagemin": "^4.1.0"
   },

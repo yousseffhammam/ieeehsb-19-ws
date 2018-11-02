@@ -1,0 +1,14 @@
+@mixin transition($scale){
+  -webkit-transform:scale($scale); /* Safari and Chrome */
+  -moz-transform:scale($scale); /* Firefox */
+  -ms-transform:scale($scale); /* IE 9 */
+  -o-transform:scale($scale); /* Opera */
+  transform:scale($scale);
+}
+@mixin transition-time($time, $effect){
+  -webkit-transition: all $time $effect; /* Safari and Chrome */
+  -moz-transition: all $time $effect; /* Firefox */
+  -ms-transition: all $time $effect; /* IE 9 */
+  -o-transition: all $time $effect; /* Opera */
+  transition: all $time $effect;
+}

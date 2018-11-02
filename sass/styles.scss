@@ -1,6 +1,10 @@
 /* app.scss */
 @import "../bower_components/susy/sass/susy";
 @import "../bower_components/breakpoint-sass/stylesheets/breakpoint";
+@import "mixins/variables";
+@import "mixins/link-style";
+@import "mixins/transition";
 @import "base/resets";
-@import "layout";
-@import "modules/home"
+@import "layout/layout";
+@import "modules/header";
+@import "modules/home";
