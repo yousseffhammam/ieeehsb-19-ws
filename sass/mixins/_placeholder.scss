@@ -1,0 +1,27 @@
+@mixin placeholder-color($color){
+  input, textarea{
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #fff !important;
+      opacity: 1; /* Firefox */
+    }
+    &::-webkit-input-placeholder{
+      color: $color;
+      opacity: 1;
+    }
+    &::-moz-placeholder{
+      color: $color;
+      opacity: 1;
+    }
+    &:-moz-placeholder{/* Older versions of Firefox */
+      color: $color;
+      opacity: 1;
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #fff !important;
+    }
+    &:-ms-input-placeholder{
+      color: $color;
+      opacity: 1;
+    }
+  }
+}

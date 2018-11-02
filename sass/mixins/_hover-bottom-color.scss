@@ -1,0 +1,6 @@
+@mixin hover-bottom-color($size, $color) {
+	border-bottom: $size solid $color;
+	a:hover {
+		background-color: $color;
+	}
+}

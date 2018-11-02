@@ -1,0 +1,45 @@
+//susy configurations
+$susy: (
+  columns: 12,
+  gutters: 0.5,
+  //gutter-position: inside,
+  global-box-sizing: border-box,
+  //output: isolate
+);
+/*break points*/
+$bp-mobile: 320px; 
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+// $bp-mobile-to-tablet: $bp-mobile $bp-tablet;
+// $bp-tablet-to-desktop: $bp-tablet $bp-desktop;
+
+$main-width: 1170px;
+
+/* Header Layout ================================ */
+.container{
+  max-width: $main-width;
+  margin: auto;
+}
+header {
+  @include span(12 of 12);
+  @include breakpoint($bp-mobile){
+    .site-branding {
+      @include span(10 of 12);
+    }
+    .site-navigation{
+      @include span (12 of 12)
+    }
+    .menu-toggle {
+      @include span(2 of 12 last);
+    }
+  }
+  @include breakpoint($bp-desktop){
+    .site-branding {
+      @include span(3 of 12);
+    }
+    .site-navigation {
+      @include span(9 of 12 last);
+    }
+  }
+}

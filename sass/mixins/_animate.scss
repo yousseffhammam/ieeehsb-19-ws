@@ -1,0 +1,8 @@
+@mixin animate($duration, $delay){
+  animation-duration: $duration;
+  animation-delay: $delay;
+  
+  -webkit-animation-duration: $duration;
+  -webkit-animation-delay: $delay;
+  //animation-iteration-count: infinite;
+}
