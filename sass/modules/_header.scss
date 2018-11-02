@@ -26,9 +26,10 @@ header {
                     text-decoration: none;
                     font-size: 17px;
                     @include transition-time(0.5s, ease-in-out);
-                    @include link-style(#000, $main_color);
+                    @include link-style($main_color, #fff);
                 }
             }
+
             .menu-item-has-children {
                 ul {
                     display: none;
@@ -47,7 +48,14 @@ header {
                 float: right;
                 li {
                     display: inline-block;
+                    &:not(:last-child){border-right: 1px solid $main_color;}
+                    @include transition-time(0.5s, ease-in-out);
+                    &:hover{
+                        background-color: $main_color;
+                        color: #fff
+                    }
                 }
+                
                 .menu-item-has-children {
                     position: relative;
                     ul {

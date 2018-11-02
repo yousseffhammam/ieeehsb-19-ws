@@ -17,6 +17,9 @@ $bp-desktop: 1024px;
 $main-width: 1170px;
 
 /* Header Layout ================================ */
+body{
+  font-family: $main_font_family;
+}
 .container{
   max-width: $main-width;
   margin: auto;
