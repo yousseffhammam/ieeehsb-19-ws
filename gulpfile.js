@@ -62,6 +62,12 @@ gulp.task('fontawesomeFonts', () => {
     .pipe(gulp.dest('./build/fonts'))
 });
 
+// articles
+gulp.task('articles', () => {
+    gulp.src('pdf/**/**')
+    .pipe(gulp.dest('./build/pdf'))
+});
+
 // watching files
 gulp.task('watch', () => {
     gulp.watch('*.html', ["moveindex"]);
@@ -71,8 +77,9 @@ gulp.task('watch', () => {
     ], ['styles']);
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch('images/*/*', ['image']);
+    gulp.watch('./pdf/**/**', ["articles"]);
 });
 
 
 
-gulp.task('default', ['moveindex','styles','scripts','image','libraries','fontawesomeFonts','watch']);
+gulp.task('default', ['moveindex','styles','scripts','image','libraries','fontawesomeFonts', 'articles','watch']);
