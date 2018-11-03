@@ -12,9 +12,9 @@ $(document).ready(function () {
         autoplay: true,
         autoplayTimeout: 2000,
         autoplayHoverPause: true,
-        dots: true,
-        dotsEach: true,
-        nav: true,
+        dots: false,
+        dotsEach: false,
+        nav: false,
         autoHeight: false,
         responsive: {
             0: {

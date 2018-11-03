@@ -9,7 +9,7 @@ const gulp = require("gulp"),
 	log = util.log;
 
 
-// moveHTML
+// move HTML
 gulp.task('moveindex', () => {
     gulp.src('*.html')
     .pipe(gulp.dest('./build/'))
@@ -17,7 +17,7 @@ gulp.task('moveindex', () => {
 // compiling sass to css
 gulp.task("styles", function(){
 	log("Generate CSS files " + (new Date()).toString());
-    gulp.src("./sass/**/*.scss")
+    gulp.src(["./sass/**/*.scss",])
     .pipe(sass({
         style: 'expanded',
         includePaths: ['node_modules/susy/sass/']
@@ -29,28 +29,32 @@ gulp.task("styles", function(){
     .pipe(gulp.dest('./build/css'));
 });
 
-
+// libraries style
+gulp.task('libraries', () => {
+    gulp.src([
+        'node_modules/font-awesome/css/font-awesome.min.css',
+        "bower_components/owl.carousel/dist/assets/owl.carousel.min.css"
+    ])
+    .pipe(gulp.dest('./build/css'));
+});
 
 // minifying js script
 gulp.task('scripts', () => {
-    gulp.src(['js/*.js','./bower_components/jquery/dist/jquery.min.js'])
+    gulp.src([
+        'js/*.js',
+        './bower_components/jquery/dist/jquery.min.js',
+        './bower_components/owl.carousel/dist/owl.carousel.min.js'
+    ])
     .pipe(uglify())
     .pipe(gulp.dest('./build/js'));
 });
 
 // compress images
 gulp.task('image', () => {
-    gulp.src('images/*/*')
+    gulp.src('images/**/*')
     .pipe(imagemin())
     .pipe(gulp.dest('./build/images'));
 });
-
-// font awesome style
-gulp.task('fontawesomeCSS', () => {
-    gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
-    .pipe(gulp.dest('./build/css'));
-});
-
 
 // font awesome 
 gulp.task('fontawesomeFonts', () => {
@@ -71,4 +75,4 @@ gulp.task('watch', () => {
 
 
 
-gulp.task('default', ['moveindex','styles','scripts','image','fontawesomeCSS','fontawesomeFonts','watch']);
+gulp.task('default', ['moveindex','styles','scripts','image','libraries','fontawesomeFonts','watch']);
