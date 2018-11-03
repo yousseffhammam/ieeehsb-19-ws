@@ -5,3 +5,28 @@ function map() {
     };
     var map = new window.google.maps.Map(document.getElementById("googleMap"), mapProp);
 }
+
+$(document).ready(function () {
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        dots: true,
+        dotsEach: true,
+        nav: true,
+        autoHeight: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 1
+            }
+        }
+    });
+
+});
