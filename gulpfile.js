@@ -33,14 +33,14 @@ gulp.task("styles", function(){
 
 // minifying js script
 gulp.task('scripts', () => {
-    gulp.src(['js/*.js'])
-    // .pipe(uglify())
+    gulp.src(['js/*.js','./bower_components/jquery/dist/jquery.min.js'])
+    .pipe(uglify())
     .pipe(gulp.dest('./build/js'));
 });
 
 // compress images
 gulp.task('image', () => {
-    gulp.src('images/*')
+    gulp.src('images/*/*')
     .pipe(imagemin())
     .pipe(gulp.dest('./build/images'));
 });
@@ -66,7 +66,7 @@ gulp.task('watch', () => {
         'sass/**/*.scss'
     ], ['styles']);
     gulp.watch('js/*.js', ['scripts']);
-    gulp.watch('images/*', ['image']);
+    gulp.watch('images/*/*', ['image']);
 });
 
 

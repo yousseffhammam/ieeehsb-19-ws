@@ -19,6 +19,7 @@
     "breakpoint-sass": "^2.7.1"
   },
   "dependencies": {
-    "breakpoint-sass": "^2.7.1"
+    "breakpoint-sass": "^2.7.1",
+    "owl.carousel": "^2.3.4"
   }
 }
