@@ -1,0 +1,54 @@
+.login-container{
+    img{
+        display: block;
+        margin: auto;
+    }
+    
+}
+
+.login-form{
+    
+    @include span(12 of 12);
+    @include breakpoint($bp-tablet){
+        @include span(6 of 12);
+        transform: translateX(70%) !important
+    }
+    form{
+        padding: 10px;
+        input, button{
+            display: block;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+        input{
+            padding: 10px 5px;
+            @include span(12 of 12);
+            @include breakpoint($bp-tablet){
+                @include span(10 of 12);
+            }
+        }
+        .action{
+            @include span (12 of 12);
+            
+            button{
+                float: right;    
+                background-color: $main_color;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                @include span(12 of 12);
+                @include breakpoint($bp-tablet){
+                    @include span (3 of 12);
+                }
+            }
+            a{
+                display: block;
+                @include breakpoint($bp-tablet){
+                    @include span (4 of 12 last);
+                }
+            }
+        }
+        
+    }
+    
+}
