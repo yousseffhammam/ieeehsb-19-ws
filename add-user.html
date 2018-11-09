@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IEEE Helwan Student Chapter</title>
+    <meta name="author" content="Mohamed Emad">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/styles.min.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <aside>
+            <div class="site-branding">
+                <a href="index.html"> <img src="./images/logo.png" alt="IEEE Helwan Student Branch"> </a>
+            </div><!-- .site-branding -->
+            <nav>
+                <ul>
+                    <li>
+                        <a href="dashboard_posts.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posts</a>
+                        <a href="add-post.html"><i class="fa fa-pencil" aria-hidden="true"></i> Add post</a>
+                        <a href="users.html"><i class="fa fa-users" aria-hidden="true"></i> users</a>
+                        <a href="add-user.html"><i class="fa fa-user-plus" aria-hidden="true"></i> add user</a>
+                        <a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="login-form add-user">
+                <!-- link with logo to go to the main page -->
+                <a href="index.html">
+                    <img src="./images/logo.png" alt="ieee-logo">
+                </a>
+                <!-- intro to form -->
+                <div class="intro">
+                    <h1>Login to your Dashboard</h1>
+                </div>
+                <!-- login form -->
+                <form id="form" action="" method="post">
+                    <!-- User Name -->
+                    <div class="field-wrap">
+                        <label>
+                            Name<span class="req">*</span>
+                        </label>
+                        <input id="name" type="text" required autocomplete="on" />
+                    </div>
+                    <!-- email input -->
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        <input id="email" type="email" required autocomplete="on" />
+                    </div>
+                    <!-- position input -->
+                    <div class="field-wrap">
+
+                        <select name="position" id="position">
+                            <option value="admin" disabled selected>Role <span class="req">*</span></option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <!-- password input -->
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input id="pass" type="password" required autocomplete="off" />
+                    </div>
+                    <!-- password input -->
+                    <div class="field-wrap">
+                        <label>
+                            Re-Password<span class="req">*</span>
+                        </label>
+                        <input id="re_password" type="password" required autocomplete="off" />
+                    </div>
+
+                    <!-- login button -->
+                    <button type="submit">Add User</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <div class="copy">
+        <div class="container">
+            <p>&copy; IEEE-HELWAN STUDENT BRANCH - All Copy Right Reseved</p>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.min.js"></script>
+
+</body>
+
+</html>
