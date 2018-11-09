@@ -1,0 +1,21 @@
+.users{
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-right: 10px;
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+    
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid $main_color;
+        color: #000;
+
+    }
+    
+    tr:nth-child(even){background-color: #f2f2f2}
+}

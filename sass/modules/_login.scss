@@ -55,7 +55,7 @@
                 color: $white;
             }
 
-            input {
+            input, select {
                 font-size: 22px;
                 display: block;
                 width: 100%;
@@ -71,6 +71,12 @@
                 &:focus {
                     outline: 0;
                     border-color: $white;
+                }
+            }
+            select{
+                option{
+                    background-color: $main-color-light;
+                    border: 1px solid gray !important;
                 }
             }
         }
