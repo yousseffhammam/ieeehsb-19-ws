@@ -1,71 +1,94 @@
 const gulp = require("gulp"),
-	util = require("gulp-util"),
-	sass = require("gulp-sass"),
-	autoprefixer = require('gulp-autoprefixer'),
-	minifycss = require('gulp-minify-css'),
+    // files collector
+    concat = require('gulp-concat'),
+    // sass to css compiler
+    sass = require("gulp-sass"),
+    // autoprefixer
+    autoprefixer = require('gulp-autoprefixer'),
+    // minifying CSS files
+    cleanCSS  = require('gulp-clean-css'),
+    // minifying js files
+    minify = require('gulp-minify'),
+    // es6 compiler
+    babel = require('gulp-babel'),
+    // image minifying
+    imagemin = require('gulp-imagemin'),
+    // files renamer
     rename = require('gulp-rename'),
-    uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin');
-	log = util.log;
-
+    // loging the time and special message when changing
+    util = require("gulp-util"),
+    log = util.log;
 
 // move HTML
 gulp.task('moveindex', () => {
     gulp.src('*.html')
-    .pipe(gulp.dest('./build/'))
+        .pipe(gulp.dest('./build/'))
 });
 // compiling sass to css
-gulp.task("styles", function(){
-	log("Generate CSS files " + (new Date()).toString());
-    gulp.src(["./sass/**/*.scss",])
+gulp.task("styles", function () {
+    log("Generate CSS files " + (new Date()).toString());
+    gulp.src(["./sass/**/*.scss", ])
     .pipe(sass({
         style: 'expanded',
         includePaths: ['node_modules/susy/sass/']
     }))
-    .pipe(autoprefixer("last 3 version","safari 5", "ie 8", "ie 9"))
+    .pipe(autoprefixer("last 5 version", "safari 5", "ie 8", "ie 9"))
     .pipe(gulp.dest("./build/css"))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(cleanCSS())
     .pipe(gulp.dest('./build/css'));
 });
 
 // libraries style
 gulp.task('libraries', () => {
     gulp.src([
-        'node_modules/font-awesome/css/font-awesome.min.css',
-        "bower_components/owl.carousel/dist/assets/owl.carousel.min.css"
-    ])
-    .pipe(gulp.dest('./build/css'));
+            'node_modules/font-awesome/css/font-awesome.min.css',
+            "bower_components/owl.carousel/dist/assets/owl.carousel.min.css"
+        ])
+        .pipe(gulp.dest('./build/css'));
 });
 
 // minifying js script
 gulp.task('scripts', () => {
+    gulp.src(['js/**/*.js'])
+    .pipe(concat('main.js'))
+    .pipe(minify({
+        ext:{
+            min:'.min.js'
+        },
+        noSource: false
+    }))
+    .pipe(gulp.dest('./build/js'));
+});
+
+gulp.task('libraries_scripts', () => {
     gulp.src([
-        'js/*.js',
-        './bower_components/jquery/dist/jquery.min.js',
-        './bower_components/owl.carousel/dist/owl.carousel.min.js'
-    ])
-    .pipe(uglify())
+            './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/owl.carousel/dist/owl.carousel.min.js'
+        ]
+    )
     .pipe(gulp.dest('./build/js'));
 });
 
 // compress images
 gulp.task('image', () => {
     gulp.src('images/**/*')
-    .pipe(imagemin())
-    .pipe(gulp.dest('./build/images'));
+        .pipe(imagemin())
+        .pipe(gulp.dest('./build/images'));
 });
 
 // font awesome 
 gulp.task('fontawesomeFonts', () => {
     gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('./build/fonts'))
+        .pipe(gulp.dest('./build/fonts'))
 });
 
 // articles
 gulp.task('articles', () => {
     gulp.src('pdf/**/**')
-    .pipe(gulp.dest('./build/pdf'))
+        .pipe(gulp.dest('./build/pdf'))
 });
 
 // watching files
@@ -75,11 +98,11 @@ gulp.task('watch', () => {
         'node_modules/susy/sass/_susy.scss',
         'sass/**/*.scss'
     ], ['styles']);
-    gulp.watch('js/*.js', ['scripts']);
+    gulp.watch('js/**/*.js', ['scripts']);
     gulp.watch('images/*/*', ['image']);
     gulp.watch('./pdf/**/**', ["articles"]);
 });
 
 
 
-gulp.task('default', ['moveindex','styles','scripts','image','libraries','fontawesomeFonts', 'articles','watch']);
+gulp.task('default', ['moveindex', 'styles', 'scripts', 'libraries_scripts', 'image', 'libraries', 'fontawesomeFonts', 'articles', 'watch']);

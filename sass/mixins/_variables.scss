@@ -1,3 +1,8 @@
 $main_font-family: Roboto, sans-serif;
 $main_text-transform: uppercase;
 $main_color: #016699;
+$main-color-light: lighten($main_color,5%);
+$main-color-dark: darken($main_color,5%);
+$gray-light: #a0b3b0;
+$gray: #ddd;
+$white: #ffffff;

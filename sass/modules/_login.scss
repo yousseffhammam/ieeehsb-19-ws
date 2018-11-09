@@ -1,54 +1,124 @@
-.login-container{
-    img{
-        display: block;
-        margin: auto;
-    }
-    
-}
+.login-form {
+    margin: 40px auto;
 
-.login-form{
-    
-    @include span(12 of 12);
-    @include breakpoint($bp-tablet){
-        @include span(6 of 12);
-        transform: translateX(70%) !important
+    img {
+        display: block;
+        margin: auto
     }
-    form{
-        padding: 10px;
-        input, button{
-            display: block;
-            margin: 10px;
-            border: 1px solid #ccc;
+
+    .intro {
+        text-align: center;
+
+        h1 {
+            font-weight: bold
         }
-        input{
-            padding: 10px 5px;
-            @include span(12 of 12);
-            @include breakpoint($bp-tablet){
-                @include span(10 of 12);
-            }
-        }
-        .action{
-            @include span (12 of 12);
-            
-            button{
-                float: right;    
-                background-color: $main_color;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 5px;
-                @include span(12 of 12);
-                @include breakpoint($bp-tablet){
-                    @include span (3 of 12);
+    }
+
+    form {
+        background: rgba($main_color, .9);
+        padding: 40px;
+        max-width: 600px;
+        margin: 40px auto;
+        border-radius: 4px;
+        box-shadow: 0 4px 10px 4px rgba($main_color, .3);
+
+        .field-wrap {
+            position: relative;
+            margin-bottom: 40px;
+
+            label {
+                position: absolute;
+                left: 13px;
+                color: rgba($white, 1);
+                @include transition-time(0.25s, ease-in-out);
+                -webkit-backface-visibility: hidden;
+                pointer-events: none;
+                font-size: 22px;
+
+                .req {
+                    margin: 2px;
+                    color: red;
                 }
             }
-            a{
+
+            label.active {
+                transform: translateY(-30px);
+                left: 2px;
+                font-size: 14px;
+
+                .req {
+                    opacity: 0;
+                }
+            }
+
+            label.highlight {
+                color: $white;
+            }
+
+            input {
+                font-size: 22px;
                 display: block;
-                @include breakpoint($bp-tablet){
-                    @include span (4 of 12 last);
+                width: 100%;
+                height: 100%;
+                padding: 5px 10px;
+                background: none;
+                background-image: none;
+                border: 1px solid $gray-light;
+                color: $white;
+                border-radius: 0;
+                @include transition-time(0.5s, ease-in-out);
+
+                &:focus {
+                    outline: 0;
+                    border-color: $white;
                 }
             }
         }
-        
+        #remember{
+            display: inline-block;
+            
+            color: $white;
+            input{
+                display: inline-block
+            }
+        }
+
+        .forgot {
+            display: inline-block;
+            text-align: right;
+            float: right;
+            a {
+                display: block;
+                text-decoration: none;
+                color: $white;
+                @include transition-time(0.5s, ease-in-out);
+
+                &:hover {
+                    color: #000;
+                }
+            }
+            
+        }
+
+        button {
+            display: block;
+            border: 0;
+            outline: none;
+            border-radius: 0;
+            padding: 15px 5px;
+            font-size: 1rem;
+            letter-spacing: .1em;
+            background: #000;
+            color: $white;
+            -webkit-appearance: none;
+            border-radius: 5px;
+            @include transition-time(0.5s, ease-in-out);
+
+            &:hover,
+            &:focus {
+                background: $white;
+                color: $main_color;
+            }
+        }
     }
-    
 }
