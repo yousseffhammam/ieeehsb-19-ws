@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Post\PostCollection;
+use App\Http\Resources\Post\PostResource;
 use App\Post;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Validator ;
 use Illuminate\Http\Request;
 
+
 class PostsController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
     }
 
     public function index()
-    {
+                                {
         $posts =   Post::orderBy('created_at','desc')->paginate(5);
-
-        return view('posts.index')->with('posts',$posts);
+//        return PostCollection::collection($posts);
+        return view('/posts.index' , compact('posts'));
     }
 
     /**
@@ -31,6 +34,7 @@ class PostsController extends Controller
     public function create()
     {
         return view('posts.create');
+//        return redirect('posts/create');
     }
 
     /**
@@ -42,20 +46,21 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $fileNameStoreImage = null;
-        $fileNameStoreVideo =null;
-        $fileNameStoreFile = null;
-        //
-        $this->validate($request ,[
-            'title'=>'required',
-            'body'=>'required',
-            'post_image'=>'image|nullable|max:1024 | mimes:jpg,png,jpeg,svg',
-            'post_video'=>'nullable | max:20000 |mimes:mp4,3pg,flv,mkv,weba',
-            'post_file'=>'nullable|max:1024 | mimes:pdf,txt,docx,doc,pptx,ppt,xls '
-        ]);
+        if((auth()->user()) || (auth()->user()->type == 'admin' ) ||$this->middleware('auth') ) {
+            $fileNameStoreImage = null;
+            $fileNameStoreVideo = null;
+            $fileNameStoreFile = null;
+            //
+            $this->validate($request, [
+                'title' => 'required',
+                'body' => 'required',
+                'post_image' => 'image|nullable|max:1024 | mimes:jpg,png,jpeg,svg',
+                'post_video' => 'nullable | max:20000 |mimes:mp4,3pg,flv,mkv,weba',
+                'post_file' => 'nullable|max:1024 | mimes:pdf,txt,docx,doc,pptx,ppt,xls '
+            ]);
 
 //upload image
-        if($request->hasFile('post_image')){
+            if ($request->hasFile('post_image')) {
 
 //            foreach ($request->post_image as $post_image) {
 
@@ -66,67 +71,60 @@ class PostsController extends Controller
 
                 $path = $request->file('post_image')->move(base_path() . '/public/uploaded/images/', $fileNameStoreImage);
 
-
-//                $filenameWithExtention = $post_image->getClientOriginalName();
-//                $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
-//                $extension = $post_image->getClientOriginalExtension();
-//                $fileNameStoreImage = $fileName . '_' . time() . '.' . $extension;
-//
-//                $path = $post_image->move(base_path() . '/public/uploaded/images/', $fileNameStoreImage);
-
             }
-
 
 
 //        upload video
 
-        if($request->hasFile('post_video')){
+            if ($request->hasFile('post_video')) {
 
-            $filenameWithExtention = $request->file('post_video')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExtention,PATHINFO_FILENAME);
-            $extension = $request->file('post_video')->getClientOriginalExtension();
-            $fileNameStoreVideo = $fileName .'_'.time().'.'.$extension;
+                $filenameWithExtention = $request->file('post_video')->getClientOriginalName();
+                $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
+                $extension = $request->file('post_video')->getClientOriginalExtension();
+                $fileNameStoreVideo = $fileName . '_' . time() . '.' . $extension;
 
-            $path = $request->file('post_video')->move(base_path() . '/public/uploaded/videos/', $fileNameStoreVideo);
+                $path = $request->file('post_video')->move(base_path() . '/public/uploaded/videos/', $fileNameStoreVideo);
 
+            }
+
+            //        upload file
+
+            if ($request->hasFile('post_file')) {
+
+                $filenameWithExtention = $request->file('post_file')->getClientOriginalName();
+                $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
+                $extension = $request->file('post_file')->getClientOriginalExtension();
+                $fileNameStoreFile = $fileName . '_' . time() . '.' . $extension;
+
+                $path = $request->file('post_file')->move(base_path() . '/public/uploaded/files/', $fileNameStoreFile);
+
+
+            }
+
+
+            $post = new Post;
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->user_id = auth()->user()->id;
+            $post->post_owner = auth()->user()->name;
+            $post->post_image = $fileNameStoreImage;
+            $post->post_video = $fileNameStoreVideo;
+            $post->post_file = $fileNameStoreFile;
+            $post->save();
+
+//            return redirect('api/posts')->with('success', 'Done successfully');
+            return redirect('/posts')->with('success', 'Done successfully');
+        }else{
+//            return redirect('api/auth/login')->with('Unauthorized' , 'Please Login First');
+            return redirect('/login')->with('Unauthorized' , 'Please Login First');
         }
-
-        //        upload file
-
-        if($request->hasFile('post_file')){
-
-            $filenameWithExtention = $request->file('post_file')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExtention,PATHINFO_FILENAME);
-            $extension = $request->file('post_file')->getClientOriginalExtension();
-            $fileNameStoreFile = $fileName .'_'.time().'.'.$extension;
-
-            $path = $request->file('post_file')->move(base_path() . '/public/uploaded/files/', $fileNameStoreFile);
-
-
-
-        }
-
-
-
-        $post = new Post;
-        $post->title           = $request->input('title');
-        $post->body            = $request->input('body');
-        $post->user_id         =  auth()->user()->id;
-        $post->post_owner      =  auth()->user()->name;
-        $post->post_image      =  $fileNameStoreImage;
-        $post->post_video      =  $fileNameStoreVideo;
-        $post->post_file      =  $fileNameStoreFile;
-        $post->save();
-
-        return redirect('/posts')->with('success', 'Done successfully');
     }
 
 
-    public function show($id)
+//    public function show($id)
+    public function show(Post $post)
     {
-        $post  =   Post::find($id);
-
-        return view('posts.show')->with('post',$post);
+        return new PostResource($post);
     }
 
     /**
@@ -143,6 +141,7 @@ class PostsController extends Controller
              return view('posts.edit')->with('post',$post);
         }
 
+//        return redirect('api/posts')->with('error','Unauthorized');
         return redirect('/posts')->with('error','Unauthorized');
     }
 
@@ -155,29 +154,32 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $post = Post::findOrFail($id);
+
+     if((auth()->user()->id == $post->user_id) || (auth()->user()->type == 'admin' ) ){
 //        $fileNameStoreImage = null;
 //        $fileNameStoreVideo =null;
 //        $fileNameStoreFile = null;
-        $post =   Post::findOrFail($id);
+
         $fileNameStoreImage = $post->post_image;
-        $fileNameStoreVideo =$post->post_video;
+        $fileNameStoreVideo = $post->post_video;
         $fileNameStoreFile = $post->post_file;
 
-        $this->validate($request ,[
-            'title'=>'required',
-            'body'=>'required',
-            'post_image'=>'image|nullable|max:1024 | mimes:jpg,png,jpeg,svg',
-            'post_video'=>'nullable | max:20000 |mimes:mp4,3pg,flv,mkv,weba',
-            'post_file'=>'nullable|max:1024 | mimes:pdf,txt,docx,doc,pptx,ppt,xls '
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+            'post_image' => 'image|nullable|max:1024 | mimes:jpg,png,jpeg,svg',
+            'post_video' => 'nullable | max:20000 |mimes:mp4,3pg,flv,mkv,weba',
+            'post_file' => 'nullable|max:1024 | mimes:pdf,txt,docx,doc,pptx,ppt,xls '
         ]);
 
 //upload image
-        if($request->hasFile('post_image')){
+        if ($request->hasFile('post_image')) {
 
             $filenameWithExtention = $request->file('post_image')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExtention,PATHINFO_FILENAME);
+            $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
             $extension = $request->file('post_image')->getClientOriginalExtension();
-            $fileNameStoreImage = $fileName .'_'.time().'.'.$extension;
+            $fileNameStoreImage = $fileName . '_' . time() . '.' . $extension;
 
             $path = $request->file('post_image')->move(base_path() . '/public/uploaded/images/', $fileNameStoreImage);
 
@@ -188,12 +190,12 @@ class PostsController extends Controller
 
 //        upload video
 
-        if($request->hasFile('post_video')){
+        if ($request->hasFile('post_video')) {
 
             $filenameWithExtention = $request->file('post_video')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExtention,PATHINFO_FILENAME);
+            $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
             $extension = $request->file('post_video')->getClientOriginalExtension();
-            $fileNameStoreVideo = $fileName .'_'.time().'.'.$extension;
+            $fileNameStoreVideo = $fileName . '_' . time() . '.' . $extension;
 
             $path = $request->file('post_video')->move(base_path() . '/public/uploaded/videos/', $fileNameStoreVideo);
 
@@ -203,12 +205,12 @@ class PostsController extends Controller
 
         //        upload file
 
-        if($request->hasFile('post_file')){
+        if ($request->hasFile('post_file')) {
 
             $filenameWithExtention = $request->file('post_file')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExtention,PATHINFO_FILENAME);
+            $fileName = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
             $extension = $request->file('post_file')->getClientOriginalExtension();
-            $fileNameStoreFile = $fileName .'_'.time().'.'.$extension;
+            $fileNameStoreFile = $fileName . '_' . time() . '.' . $extension;
 
             $path = $request->file('post_file')->move(base_path() . '/public/uploaded/files/', $fileNameStoreFile);
 
@@ -217,14 +219,19 @@ class PostsController extends Controller
         }
 
 //        $post =   Post::findOrFail($id);
-        $post->title           = $request->input('title');
-        $post->body            = $request->input('body');
-        $post->post_image      =  $fileNameStoreImage;
-        $post->post_video      =  $fileNameStoreVideo;
-        $post->post_file      =  $fileNameStoreFile;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->post_image = $fileNameStoreImage;
+        $post->post_video = $fileNameStoreVideo;
+        $post->post_file = $fileNameStoreFile;
         $post->update();
 
-        return redirect('/posts')->with('success', 'Done successfully');
+//        return redirect('/api/posts')->with('success', 'Done successfully');
+                 return redirect('/posts')->with('success', 'Done successfully');
+    }else{
+//         return redirect('/api/posts')->with('error','Unauthorized');
+         return redirect('/posts')->with('error','Unauthorized');
+     }
     }
 
     /**
@@ -252,14 +259,20 @@ class PostsController extends Controller
             }
 
             $post->delete() ;
-
+//            return redirect('api/posts')->with('success', 'Done successfully');
             return redirect('/posts')->with('success', 'Done successfully');
-//            return redirect()->back();
         }else{
-            return redirect('/posts')->with('error','Unauthorized');
-//            return redirect()->back();
+//           return redirect('api/posts')->with('error','Unauthorized');
+           return redirect('/posts')->with('error','Unauthorized');
 
         }
 
     }
+
+ public function viewPost($id)
+ {
+     $post = Post::findOrFail($id);
+     return view('posts/viewPost' , compact('post'));
+ }
+
 }

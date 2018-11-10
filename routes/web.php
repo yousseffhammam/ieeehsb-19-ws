@@ -21,21 +21,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//
 Route::get('/home', 'HomeController@index')->name('home');
+//
+Route::get('/adduser', 'UserController@viewAdd');
+Route::post('/adduser', 'UserController@addUser');
+Route::get('/users', 'UserController@index');
+//Route::resource('/users', 'UserController');
 
-Route::get('/addUser', 'UserConroller@viewAdd');
-Route::post('/adduser', 'UserConroller@addUser');
-Route::get('/users', 'UserConroller@users');
-
-//Route::get('/addUser', function () {
-//    return view('admin/addUser');
-//});
-Route::get('users/{id}', 'UserConroller@destroy');
+Route::get('users/{id}', 'UserController@destroy');
 
 Route::resource('posts', 'PostsController');
+
+
 
 Route::get('/create', 'PostsController@create');
 Route::post('/create', 'PostsController@store');
 
 Route::post('/posts/{id}', 'PostsController@update');
 
+Route::get('/posts/{id}/view', 'PostsController@viewPost');

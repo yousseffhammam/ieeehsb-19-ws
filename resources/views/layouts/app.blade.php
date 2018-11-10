@@ -78,7 +78,7 @@
 
                     @if(\auth()->user()->type == 'admin')
                         <li><a href="/users">Users</a></li>
-                        <li><a href="/addUser">Add User</a></li>
+                        <li><a href="/adduser">Add User</a></li>
                     @endif
                         @endif
 

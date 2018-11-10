@@ -41,16 +41,7 @@
 {{--     <span class="label label-info">  by {{$post->user->name}}</span>--}}
      <span class="label label-info">  by {{$post->post_owner}}</span>
 
-      @if((auth()->user()->id == $post->user_id) || (auth()->user()->type == 'admin') )
-      <div style="  display:inline-block">
-
-          <a href="posts/{{$post->id}}/edit"><i class="fa fa-edit"></i></a>
-
-          {!! Form::open(['method'=>'DELETE' , 'route'=>['posts.destroy' , $post->id]]) !!}
-          {!! Form::submit('X' , ['class'=>'btn btn-danger d-inline-block'] ) !!}
-          {!! Form::close() !!}
-      </div>
-      @endif
+      <a href="posts/{{$post->id}}/view">View Post</a>
 
   </div>
 </div>
