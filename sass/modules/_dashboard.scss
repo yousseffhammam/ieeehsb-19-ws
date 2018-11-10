@@ -1,26 +1,47 @@
-.dashboard{
-    aside{
-        @include span(3 of 12);
+.dashboard {
+    
+    
+    aside {
+        
+        @include span(9 of 12);
         border-right: 1px solid $main_color;
         overflow: hidden;
-        min-height: 600px;
-        .site-branding{
+        min-height: 900px;
+        height: 1000px;
+        background-color: $gray;
+        display: none;
+        @include transition-time(0.5s, ease-in-out);
+        @include breakpoint($bp_tablet){
+            @include span(6 of 12);
+            display: block;
+        }
+        @include breakpoint($bp_desktop){
+            @include span(3 of 12);
+        }
+
+        .site-branding {
             width: 100%;
-            a{
+            background-color: #fff;
+
+            a {
                 display: block;
-                img{
+
+                img {
                     display: block;
                     width: 100%
                 }
             }
         }
+
         ul {
-            background-color: $gray;
+            
+
             display: block;
+
             li {
                 display: block;
                 list-style: none;
-                
+
                 a {
                     display: block;
                     border: 1px solid $main_color;
@@ -34,15 +55,33 @@
             }
         }
     }
-    main{
-        @include span(9 of 12 last);
-        .posts{
-            padding-top: 10px;
+
+    main {
+        @include span(12 of 12 );
+        @include breakpoint($bp_tablet){
+            @include span(6 of 12 last);
+        }
+        @include breakpoint($bp_desktop){
+            @include span(9 of 12 last);
+        }
+
+        .posts {
+            padding: 10px;
             @include span (12 of 12);
-            .post{
-                @include span (6 of 12);
-                margin: 0px 10px 20px 0;
+
+            .post {
+                
+                @include span (12 of 12);
+                @include breakpoint($bp_tablet){
+                    padding: 10px;
+                }
+                @include breakpoint($bp_desktop){
+                    @include span( 6 of 12 last);
+                    margin: 10px;
+                }
+                
             }
         }
     }
+
 }
