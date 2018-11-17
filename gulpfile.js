@@ -22,8 +22,9 @@ const gulp = require("gulp"),
 // move HTML
 gulp.task('moveindex', () => {
     gulp.src('*.html')
-        .pipe(gulp.dest('./build/'))
+    .pipe(gulp.dest('./build/'))
 });
+
 // compiling sass to css
 gulp.task("styles", function () {
     log("Generate CSS files " + (new Date()).toString());
@@ -42,18 +43,16 @@ gulp.task("styles", function () {
 });
 
 // libraries style
-gulp.task('libraries', () => {
+gulp.task('libraries_CSS', () => {
     gulp.src([
-            'node_modules/font-awesome/css/font-awesome.min.css',
-            "bower_components/owl.carousel/dist/assets/owl.carousel.min.css"
-        ])
-        .pipe(gulp.dest('./build/css'));
+        'node_modules/font-awesome/css/font-awesome.min.css'
+    ])
+    .pipe(gulp.dest('./build/css'));
 });
 
 // minifying js script
 gulp.task('scripts', () => {
     gulp.src(['js/**/*.js'])
-    .pipe(concat('main.js'))
     .pipe(minify({
         ext:{
             min:'.min.js'
@@ -65,10 +64,8 @@ gulp.task('scripts', () => {
 
 gulp.task('libraries_scripts', () => {
     gulp.src([
-            './bower_components/jquery/dist/jquery.min.js',
-            './bower_components/owl.carousel/dist/owl.carousel.min.js'
-        ]
-    )
+        './bower_components/jquery/dist/jquery.min.js'
+    ])
     .pipe(gulp.dest('./build/js'));
 });
 
@@ -79,8 +76,8 @@ gulp.task('image', () => {
         .pipe(gulp.dest('./build/images'));
 });
 
-// font awesome 
-gulp.task('fontawesomeFonts', () => {
+// font awesome fonts
+gulp.task('fontawesome_Fonts', () => {
     gulp.src('node_modules/font-awesome/fonts/*')
         .pipe(gulp.dest('./build/fonts'))
 });
@@ -94,15 +91,12 @@ gulp.task('articles', () => {
 // watching files
 gulp.task('watch', () => {
     gulp.watch('*.html', ["moveindex"]);
-    gulp.watch([
-        'node_modules/susy/sass/_susy.scss',
-        'sass/**/*.scss'
-    ], ['styles']);
+    gulp.watch(['sass/**/*.scss'], ['styles']);
     gulp.watch('js/**/*.js', ['scripts']);
-    gulp.watch('images/*/*', ['image']);
+    gulp.watch('images/**/**', ['image']);
     gulp.watch('./pdf/**/**', ["articles"]);
 });
 
 
 
-gulp.task('default', ['moveindex', 'styles', 'scripts', 'libraries_scripts', 'image', 'libraries', 'fontawesomeFonts', 'articles', 'watch']);
+gulp.task('default', ['moveindex', 'styles', 'libraries_CSS', 'scripts',  'libraries_scripts', 'image', 'fontawesome_Fonts', 'articles', 'watch']);
