@@ -3,10 +3,11 @@ footer {
     background: #363636;
     @include span(12 of 12);
     .reach-us {
+        @include span(12 of 12);
         @include breakpoint ($bp_tablet) {
             @include span(6 of 12);
         }
-        @include breakpoint ($bp_tablet) {
+        @include breakpoint ($bp_desktop) {
             @include span(4 of 12);
         }
         color: #FFF;
@@ -41,14 +42,17 @@ footer {
             @include span(6 of 12 last);
         }
 
-        @include breakpoint ($bp_tablet) {
+        @include breakpoint ($bp_desktop) {
             @include span(4 of 12);
         }
         color: #FFF;
         .post{
             @include span(12 of 12);
             a{
-                @include span (3 of 12);
+                @include span (12 of 12);
+                @include breakpoint ($bp_desktop) {
+                    @include span(4 of 12);
+                }
                 img{
                     display: block;
                     width: 100%;
@@ -56,7 +60,10 @@ footer {
                 }
             }
             .description{
-                @include span (9 of 12 last);
+                @include span (12 of 12 last);
+                @include breakpoint ($bp_desktop) {
+                    @include span(8 of 12 last);
+                }
                 a{
                     @include span (12 of 12 );
                     color: #FFF;
@@ -66,11 +73,9 @@ footer {
     }
 
     .locat-us {
-        @include breakpoint ($bp_tablet) {
-            @include span(12 of 12);
-        }
+        @include span(12 of 12);
 
-        @include breakpoint ($bp_tablet) {
+        @include breakpoint ($bp_desktop) {
             @include span(4 of 12 last);
         }
         width: 100%;

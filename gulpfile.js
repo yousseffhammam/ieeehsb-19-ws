@@ -15,6 +15,8 @@ const gulp = require("gulp"),
     imagemin = require('gulp-imagemin'),
     // files renamer
     rename = require('gulp-rename'),
+    // browser sync
+    browserSync = require('browser-sync').create();
     // loging the time and special message when changing
     util = require("gulp-util"),
     log = util.log;

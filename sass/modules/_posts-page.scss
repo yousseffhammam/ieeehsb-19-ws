@@ -1,25 +1,31 @@
-.posts{
-    padding-top: 100px;
+.posts {
+    padding-top: 110px;
     @include span(12 of 12);
-    .post{
-        @include span(12 of 12);
-        @include breakpoint($bp-tablet){
-            @include span (6 of 12 last);
+
+    .post {
+        @include gallery(12 of 12);
+
+        @include breakpoint($bp-tablet) {
+            @include gallery(6 of 12);
         }
-        @include breakpoint($bp-desktop){
-            @include span (4 of 12 last);
+
+        @include breakpoint($bp-desktop) {
+            @include gallery(4 of 12);
         }
-        margin: 10px;
-        a{
+
+        // float: left;
+        a {
             @include link-style(#000, $main_color);
-            img{
+
+            img {
                 width: 100%;
                 height: 200px
             }
-            h3{
+
+            h3 {
                 font-weight: 500
             }
-            
+
         }
     }
 }
