@@ -3,14 +3,14 @@ header {
     border-bottom: solid 1px #000;
     z-index: 999;
     position: fixed;
-    height: auto;
+    height: 100px;
 
     .site-branding {
         padding: 8px 0 8px 0;
         img {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
         }
     }
 
@@ -18,11 +18,9 @@ header {
         margin-top: 12px;
         ul {
             display: none;
-
             li {
                 display: block;
                 list-style: none;
-
                 a {
                     display: block;
                     text-align: left;
@@ -31,7 +29,7 @@ header {
                     font-size: 17px;
                     @include transition-time(0.5s, ease-in-out);
                     @include link-style($main_color, #fff);
-
+                    &:hover,
                     &:focus {
                         color: #fff
                     }
@@ -50,6 +48,12 @@ header {
                         &:first-child {
                             border-top: solid 1px $main_color;
                         }
+                    }
+                }
+                &:active,
+                &:focus {
+                    ul{
+                        display: block;
                     }
                 }
             }
@@ -95,7 +99,9 @@ header {
                         }
                     }
 
-                    &:hover {
+                    &:hover,
+                    &:focus {
+                        color: $white !important;
                         ul {
                             display: block;
 
@@ -107,6 +113,7 @@ header {
                         }
                     }
                 }
+                
             }
         }
     }

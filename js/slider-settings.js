@@ -9,10 +9,16 @@ function reset(){
     }
 }
 
+
 // initialize the slider
 function startSlide(){
     reset();
     sliderImages[0].style.display = 'block';
+}
+
+function autoclick() {
+    arrow_right.click();
+    setTimeout('autoclick()', 5000);
 }
 
 // show previous 
@@ -48,4 +54,6 @@ arrow_right.addEventListener('click', function(){
 })
 
 
+
 startSlide();
+setTimeout("autoclick()", 5000)
