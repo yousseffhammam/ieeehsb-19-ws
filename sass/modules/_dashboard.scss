@@ -13,12 +13,12 @@
 
         @include breakpoint($bp_tablet){
             @include span(6 of 12);
-            display: block;
-            position: relative;
         }
         
         @include breakpoint($bp_desktop){
             @include span(3 of 12);
+            display: block;
+            position: relative;
         }
 
         .site-branding {
@@ -56,10 +56,10 @@
         @include span(12 of 12 );
 
         @include breakpoint($bp_tablet){
-            @include span(6 of 12);
+            @include span(12 of 12 );
         }
         @include breakpoint($bp_desktop){
-            @include span(9 of 12);
+            @include span(9 of 12 last);
         }
         .posts {
             padding: 10px;

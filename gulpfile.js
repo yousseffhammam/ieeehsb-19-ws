@@ -15,8 +15,6 @@ const gulp = require("gulp"),
     imagemin = require('gulp-imagemin'),
     // files renamer
     rename = require('gulp-rename'),
-    // browser sync
-    browserSync = require('browser-sync').create();
     // loging the time and special message when changing
     util = require("gulp-util"),
     log = util.log;
@@ -41,7 +39,7 @@ gulp.task("styles", function () {
         suffix: '.min'
     }))
     .pipe(cleanCSS())
-    .pipe(gulp.dest('./build/css'));
+    .pipe(gulp.dest('./build/css'))
 });
 
 // libraries style
@@ -64,18 +62,19 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest('./build/js'));
 });
 
+// library scripts
 gulp.task('libraries_scripts', () => {
     gulp.src([
         './bower_components/jquery/dist/jquery.min.js'
     ])
-    .pipe(gulp.dest('./build/js'));
+    .pipe(gulp.dest('./build/js'))
 });
 
 // compress images
 gulp.task('image', () => {
     gulp.src('images/**/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./build/images'));
+        .pipe(gulp.dest('./build/images'))
 });
 
 // font awesome fonts
@@ -101,4 +100,4 @@ gulp.task('watch', () => {
 
 
 
-gulp.task('default', ['moveindex', 'styles', 'libraries_CSS', 'scripts',  'libraries_scripts', 'image', 'fontawesome_Fonts', 'articles', 'watch']);
+gulp.task('default', ['moveindex', 'styles', 'libraries_CSS',  'libraries_scripts', 'image', 'fontawesome_Fonts', 'articles', 'watch']);
