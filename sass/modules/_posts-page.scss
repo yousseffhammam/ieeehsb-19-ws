@@ -1,19 +1,11 @@
 .posts {
     padding-top: 110px;
-    @include span(12 of 12);
-
     .post {
-        @include gallery(12 of 12);
-
-        @include breakpoint($bp-tablet) {
-            @include gallery(6 of 12);
-        }
-        @include breakpoint($bp-desktop) {
-            @include gallery(4 of 12);
-        }
+        padding: 10px;
 
         border: 1px solid $main_color;
-        margin: 0 20px 0 0;
+        margin: 0 20px 10px 0;
+        word-break: break-word;
         a {
             @include link-style(#000, $main_color);
 

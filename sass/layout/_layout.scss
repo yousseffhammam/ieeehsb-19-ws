@@ -7,7 +7,7 @@ $susy: (
   //output: isolate
 );
 /*break points*/
-$bp-mobile: 320px; 
+$bp-mobile: 320px;
 $bp-tablet: 768px;
 $bp-desktop: 1024px;
 
@@ -17,33 +17,56 @@ $bp-desktop: 1024px;
 $main-width: 1170px;
 
 /* Header Layout ================================ */
-body{
+body {
   font-family: $main_font_family;
 }
-.container{
+
+.container {
   max-width: $main-width;
   padding: 10px;
   margin: auto;
 }
+
 header {
   @include span(12 of 12);
-  @include breakpoint($bp-mobile){
+
+  @include breakpoint($bp-mobile) {
     .site-branding {
       @include span(10 of 12);
     }
-    .site-navigation{
+
+    .site-navigation {
       @include span (12 of 12)
     }
+
     .menu-toggle {
       @include span(2 of 12 last);
     }
   }
-  @include breakpoint($bp-desktop){
+
+  @include breakpoint($bp-desktop) {
     .site-branding {
       @include span(3 of 12);
     }
+
     .site-navigation {
       @include span(9 of 12 last);
+    }
+  }
+}
+
+.posts {
+  @include span(12 of 12);
+
+  .post {
+    @include span(12 of 12);
+
+    @include breakpoint($bp-tablet) {
+      @include gallery(6 of 12);
+    }
+
+    @include breakpoint($bp-desktop) {
+      @include gallery(4 of 12);
     }
   }
 }
